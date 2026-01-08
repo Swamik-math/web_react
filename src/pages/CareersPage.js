@@ -1,6 +1,7 @@
 ﻿import React from "react";
 import { Link } from "react-router-dom";
 
+
 const CareersPage = () => {
   const jobs = [
     { id: "software-engineer-backend", title: "Software Engineer - Backend", department: "Engineering", location: "Remote" },
