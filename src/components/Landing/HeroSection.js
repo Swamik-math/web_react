@@ -38,25 +38,6 @@ const HeroSection = () => {
     return () => timers.forEach(timer => clearTimeout(timer));
   }, []);
   
-  // Check if images exist
-  const [imagesLoaded, setImagesLoaded] = useState({
-    background: false,
-    girl: false
-  });
-  
-  useEffect(() => {
-    // Try to load images
-    const img1 = new Image();
-    img1.src = "/images/background.jpg";
-    img1.onload = () => setImagesLoaded(prev => ({...prev, background: true}));
-    img1.onerror = () => console.log("Background image failed to load");
-    
-    const img2 = new Image();
-    img2.src = "/images/girl.png";
-    img2.onload = () => setImagesLoaded(prev => ({...prev, girl: true}));
-    img2.onerror = () => console.log("Girl image failed to load");
-  }, []);
-  
   return (
     <section style={{ 
       position: "relative", 
@@ -76,8 +57,7 @@ const HeroSection = () => {
           backgroundImage: "url(/images/background.jpg)",
           backgroundSize: "110% 110%",
           backgroundPosition: "center",
-          transition: "transform 0.1s ease-out",
-          backgroundColor: imagesLoaded.background ? "transparent" : "#4f46e5"
+          transition: "transform 0.1s ease-out"
         }}
       />
       
@@ -89,60 +69,38 @@ const HeroSection = () => {
           position: "absolute",
           bottom: 0,
           right: "5%",
-          height: "80%",
+          height: "85%",
           objectFit: "contain",
           zIndex: 10,
           opacity: Math.max(1 - scrollPosition * 0.002, 0.3),
           transition: "opacity 0.3s ease-out",
-          display: imagesLoaded.girl ? "block" : "none"
+          filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.5))"
         }}
       />
       
-      {/* Girl placeholder if image doesn"t load */}
-      {!imagesLoaded.girl && (
-        <div style={{
-          position: "absolute",
-          bottom: 0,
-          right: "5%",
-          height: "80%",
-          width: "300px",
-          background: "rgba(255,255,255,0.1)",
-          border: "2px dashed rgba(255,255,255,0.3)",
-          borderRadius: "10px",
-          zIndex: 10,
-          opacity: Math.max(1 - scrollPosition * 0.002, 0.3),
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "white",
-          fontSize: "18px"
-        }}>
-          Girl Image
-        </div>
-      )}
-      
-      {/* 5 Disappearing Small Images */}
+      {/* 5 Disappearing Property Thumbnails */}
       <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 5 }}>
         {[1, 2, 3, 4, 5].map((num) => (
           <div
             key={num}
             style={{
               position: "absolute",
-              width: "100px",
-              height: "100px",
-              borderRadius: "10px",
-              border: "4px solid white",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
+              width: "120px",
+              height: "120px",
+              borderRadius: "12px",
+              border: "4px solid rgba(255,255,255,0.8)",
+              boxShadow: "0 15px 30px rgba(0,0,0,0.4)",
               backgroundImage: `url(/images/property${num}.jpg)`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              backgroundColor: "#3b82f6", // Fallback color
               transition: "all 0.7s ease-out",
               opacity: visibleImages[num - 1] ? 1 : 0,
-              transform: visibleImages[num - 1] ? "scale(1)" : "scale(0)",
-              top: `${20 + num * 10}%`,
-              left: `${10 + num * 12}%`
+              transform: visibleImages[num - 1] ? "scale(1) rotate(0deg)" : "scale(0) rotate(180deg)",
+              top: `${15 + num * 12}%`,
+              left: `${8 + num * 13}%`,
+              cursor: "pointer"
             }}
+            title={`Property ${num}`}
           />
         ))}
       </div>
@@ -163,28 +121,36 @@ const HeroSection = () => {
             fontSize: "3.5rem", 
             fontWeight: "bold", 
             marginBottom: "20px",
-            animation: "fadeIn 1s ease-out"
+            animation: "fadeIn 1s ease-out",
+            textShadow: "0 2px 10px rgba(0,0,0,0.5)"
           }}>
             Discover Your Dream Property
           </h1>
           <p style={{ 
             fontSize: "1.25rem", 
             marginBottom: "30px",
-            animation: "slideUp 0.8s ease-out 0.3s both"
+            animation: "slideUp 0.8s ease-out 0.3s both",
+            textShadow: "0 1px 5px rgba(0,0,0,0.3)",
+            lineHeight: "1.6"
           }}>
-            Immersive virtual tours and the finest selection of premium properties
+            Explore our curated collection of premium properties with immersive virtual tours and detailed galleries.
           </p>
           <button style={{
             background: "#3b82f6",
             color: "white",
-            padding: "12px 32px",
-            borderRadius: "8px",
-            fontSize: "1rem",
+            padding: "14px 36px",
+            borderRadius: "10px",
+            fontSize: "1.1rem",
             fontWeight: "600",
             border: "none",
             cursor: "pointer",
-            animation: "slideUp 0.8s ease-out 0.6s both"
-          }}>
+            animation: "slideUp 0.8s ease-out 0.6s both",
+            boxShadow: "0 4px 15px rgba(59, 130, 246, 0.4)",
+            transition: "all 0.3s ease"
+          }}
+          onMouseOver={(e) => e.target.style.transform = "translateY(-2px)"}
+          onMouseOut={(e) => e.target.style.transform = "translateY(0)"}
+          >
             Explore Properties
           </button>
         </div>
@@ -193,7 +159,7 @@ const HeroSection = () => {
       {/* Scroll Indicator */}
       <div style={{
         position: "absolute",
-        bottom: "30px",
+        bottom: "40px",
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: 20
@@ -201,10 +167,22 @@ const HeroSection = () => {
         <div style={{ 
           animation: "bounce 2s infinite",
           color: "white",
-          fontSize: "30px"
-        }}>
+          fontSize: "40px",
+          opacity: 0.8,
+          cursor: "pointer"
+        }}
+        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+        >
           ↓
         </div>
+        <p style={{
+          color: "rgba(255,255,255,0.7)",
+          fontSize: "0.9rem",
+          marginTop: "10px",
+          textAlign: "center"
+        }}>
+          Scroll to explore
+        </p>
       </div>
     </section>
   );
