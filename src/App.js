@@ -4,6 +4,8 @@ import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
 import CareersPage from "./pages/CareersPage";
 import ContactPage from "./pages/ContactPage";
+import LoginPage from "./pages/LoginPage";
+import ImageGalleryTest from "./components/ImageGalleryTest";
 
 // Simple Job Detail Page
 const JobDetailPage = () => (
@@ -11,14 +13,14 @@ const JobDetailPage = () => (
     <div style={{ maxWidth: "800px", margin: "0 auto" }}>
       <h1 style={{ fontSize: "3rem", marginBottom: "30px" }}>Job Details</h1>
       <p style={{ fontSize: "1.125rem", lineHeight: "1.6" }}>
-        Detailed job description would appear here. This could include responsibilities, 
+        Detailed job description would appear here. This could include responsibilities,
         requirements, benefits, and application instructions.
       </p>
     </div>
   </div>
 );
 
-// Simple Join Page
+// Join Page Component
 const JoinPage = () => (
   <div style={{ minHeight: "calc(100vh - 200px)", padding: "80px 20px" }}>
     <div style={{ maxWidth: "800px", margin: "0 auto" }}>
@@ -39,7 +41,9 @@ function App() {
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/careers/:jobId" element={<JobDetailPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/join" element={<JoinPage />} />
+          <Route path="/test-images" element={<ImageGalleryTest />} />
         </Routes>
       </Layout>
     </Router>

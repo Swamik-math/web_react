@@ -1,0 +1,381 @@
+﻿import React, { useState } from "react";
+
+const PropertySelector = () => {
+  const [selectedProperty, setSelectedProperty] = useState(1);
+
+  // Updated to match the organized image structure
+  const properties = [
+    {
+      id: 1,
+      name: "Modern Villa",
+      description: "Luxury villa with ocean view and modern amenities",
+      price: "$4,200,000",
+      location: "Beverly Hills, CA",
+      bedrooms: 4,
+      bathrooms: 3,
+      sqft: "2,500",
+      thumb: "/images/property1.jpg",
+      images: [
+        "/images/property1/image1.jpg",
+        "/images/property1/image2.jpg", 
+        "/images/property1/image3.jpg",
+        "/images/property1/image4.jpg",
+        "/images/property1/image5.jpg"
+      ]
+    },
+    {
+      id: 2,
+      name: "City Apartment",
+      description: "Downtown apartment with premium amenities",
+      price: "$3,500,000",
+      location: "New York, NY",
+      bedrooms: 3,
+      bathrooms: 2,
+      sqft: "1,800",
+      thumb: "/images/property2.jpg",
+      images: [
+        "/images/property2/image1.jpg",
+        "/images/property2/image2.jpg",
+        "/images/property2/image3.jpg",
+        "/images/property2/image4.jpg",
+        "/images/property2/image5.jpg"
+      ]
+    },
+    {
+      id: 3,
+      name: "Beach House",
+      description: "Beachfront property with private access",
+      price: "$2,800,000",
+      location: "Miami, FL",
+      bedrooms: 3,
+      bathrooms: 2,
+      sqft: "2,200",
+      thumb: "/images/property3.jpg",
+      images: [
+        "/images/property3/image1.jpg",
+        "/images/property3/image2.jpg",
+        "/images/property3/image3.jpg",
+        "/images/property3/image4.jpg",
+        "/images/property3/image5.jpg"
+      ]
+    },
+    {
+      id: 4,
+      name: "Mountain Cabin",
+      description: "Cozy cabin with mountain views",
+      price: "$1,900,000",
+      location: "Aspen, CO",
+      bedrooms: 3,
+      bathrooms: 2,
+      sqft: "1,600",
+      thumb: "/images/property4.jpg",
+      images: [
+        "/images/property4/image1.jpg",
+        "/images/property4/image2.jpg",
+        "/images/property4/image3.jpg",
+        "/images/property4/image4.jpg",
+        "/images/property4/image5.jpg"
+      ]
+    },
+    {
+      id: 5,
+      name: "Urban Loft",
+      description: "Modern loft in city center",
+      price: "$2,300,000",
+      location: "Chicago, IL",
+      bedrooms: 2,
+      bathrooms: 2,
+      sqft: "1,500",
+      thumb: "/images/property5.jpg",
+      images: [
+        "/images/property5/image1.jpg",
+        "/images/property5/image2.jpg",
+        "/images/property5/image3.jpg",
+        "/images/property5/image4.jpg",
+        "/images/property5/image5.jpg"
+      ]
+    },
+  ];
+
+  return (
+    <section style={{ padding: "80px 20px", background: "#f9fafb" }}>
+      <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
+        <h2 style={{
+          fontSize: "3rem",
+          textAlign: "center",
+          marginBottom: "20px",
+          color: "#1f2937",
+          fontWeight: "bold"
+        }}>
+          Featured Properties
+        </h2>
+        <p style={{
+          textAlign: "center",
+          color: "#6b7280",
+          marginBottom: "60px",
+          fontSize: "1.25rem",
+          maxWidth: "800px",
+          marginLeft: "auto",
+          marginRight: "auto"
+        }}>
+          Browse our exclusive collection of premium properties
+        </p>
+
+        {/* Property Thumbnails - Horizontal Scroll */}
+        <div style={{
+          display: "flex",
+          gap: "25px",
+          overflowX: "auto",
+          paddingBottom: "30px",
+          marginBottom: "50px",
+          scrollbarWidth: "thin",
+          scrollbarColor: "#3b82f6 #f1f1f1"
+        }}>
+          {properties.map((property) => (
+            <div
+              key={property.id}
+              onClick={() => setSelectedProperty(property.id)}
+              style={{
+                flex: "0 0 280px",
+                borderRadius: "16px",
+                overflow: "hidden",
+                background: "white",
+                boxShadow: selectedProperty === property.id 
+                  ? "0 20px 40px rgba(59, 130, 246, 0.3)" 
+                  : "0 8px 20px rgba(0,0,0,0.1)",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                transform: selectedProperty === property.id ? "translateY(-10px)" : "none",
+                border: selectedProperty === property.id ? "4px solid #3b82f6" : "2px solid #e5e7eb"
+              }}
+            >
+              {/* Property Image */}
+              <div style={{
+                height: "200px",
+                backgroundImage: `url(${property.thumb})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                position: "relative"
+              }}>
+                <div style={{
+                  position: "absolute",
+                  top: "15px",
+                  right: "15px",
+                  background: "rgba(0,0,0,0.7)",
+                  color: "white",
+                  padding: "6px 15px",
+                  borderRadius: "20px",
+                  fontSize: "1.1rem",
+                  fontWeight: "bold"
+                }}>
+                  {property.price}
+                </div>
+              </div>
+              
+              {/* Property Info */}
+              <div style={{ padding: "20px" }}>
+                <h3 style={{
+                  fontWeight: "600",
+                  marginBottom: "8px",
+                  fontSize: "1.3rem",
+                  color: "#1f2937"
+                }}>
+                  {property.name}
+                </h3>
+                <p style={{
+                  fontSize: "0.95rem",
+                  color: "#6b7280",
+                  marginBottom: "15px",
+                  lineHeight: "1.5",
+                  height: "40px"
+                }}>
+                  {property.description}
+                </p>
+                <div style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: "0.9rem",
+                  color: "#4b5563"
+                }}>
+                  <span>📍 {property.location}</span>
+                  <span>🛏️ {property.bedrooms} beds</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Selected Property Gallery */}
+        <div style={{
+          background: "white",
+          borderRadius: "20px",
+          padding: "40px",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
+        }}>
+          <div style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "30px"
+          }}>
+            <div>
+              <h3 style={{
+                fontSize: "2rem",
+                marginBottom: "8px",
+                color: "#1f2937"
+              }}>
+                {properties.find(p => p.id === selectedProperty)?.name}
+              </h3>
+              <p style={{
+                color: "#6b7280",
+                fontSize: "1.1rem"
+              }}>
+                {properties.find(p => p.id === selectedProperty)?.location}
+              </p>
+            </div>
+            <div style={{
+              fontSize: "1.8rem",
+              fontWeight: "bold",
+              color: "#059669"
+            }}>
+              {properties.find(p => p.id === selectedProperty)?.price}
+            </div>
+          </div>
+
+          {/* Large Main Image */}
+          <div style={{
+            borderRadius: "16px",
+            overflow: "hidden",
+            marginBottom: "30px",
+            height: "400px",
+            backgroundImage: `url(${properties.find(p => p.id === selectedProperty)?.thumb})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            position: "relative"
+          }}>
+            <div style={{
+              position: "absolute",
+              bottom: "20px",
+              left: "20px",
+              background: "rgba(0,0,0,0.7)",
+              color: "white",
+              padding: "10px 20px",
+              borderRadius: "10px"
+            }}>
+              <div style={{ fontSize: "0.9rem", opacity: 0.8 }}>Currently viewing</div>
+              <div style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                {properties.find(p => p.id === selectedProperty)?.name}
+              </div>
+            </div>
+          </div>
+
+          {/* Gallery Thumbnails */}
+          <div>
+            <h4 style={{
+              fontSize: "1.3rem",
+              marginBottom: "20px",
+              color: "#1f2937"
+            }}>
+              Property Gallery
+            </h4>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+              gap: "20px"
+            }}>
+              {properties
+                .find(p => p.id === selectedProperty)
+                ?.images.map((image, index) => (
+                  <div key={index} style={{
+                    borderRadius: "12px",
+                    overflow: "hidden",
+                    height: "150px",
+                    backgroundImage: `url(${image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                    transition: "all 0.3s ease",
+                    cursor: "pointer",
+                    position: "relative"
+                  }}
+                  onMouseOver={(e) => e.target.style.transform = "scale(1.05)"}
+                  onMouseOut={(e) => e.target.style.transform = "scale(1)"}
+                  >
+                    <div style={{
+                      position: "absolute",
+                      bottom: "10px",
+                      right: "10px",
+                      background: "rgba(0,0,0,0.7)",
+                      color: "white",
+                      padding: "4px 10px",
+                      borderRadius: "20px",
+                      fontSize: "0.8rem"
+                    }}>
+                      View {index + 1}
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+
+          {/* Property Details */}
+          <div style={{
+            marginTop: "40px",
+            padding: "30px",
+            background: "#f8fafc",
+            borderRadius: "12px",
+            borderLeft: "4px solid #3b82f6"
+          }}>
+            <h4 style={{
+              fontSize: "1.3rem",
+              marginBottom: "20px",
+              color: "#1f2937"
+            }}>
+              Property Details
+            </h4>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: "20px"
+            }}>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "1.8rem", color: "#3b82f6", marginBottom: "5px" }}>
+                  🛏️
+                </div>
+                <div style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+                  {properties.find(p => p.id === selectedProperty)?.bedrooms} Bedrooms
+                </div>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "1.8rem", color: "#3b82f6", marginBottom: "5px" }}>
+                  🛁
+                </div>
+                <div style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+                  {properties.find(p => p.id === selectedProperty)?.bathrooms} Bathrooms
+                </div>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "1.8rem", color: "#3b82f6", marginBottom: "5px" }}>
+                  📐
+                </div>
+                <div style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+                  {properties.find(p => p.id === selectedProperty)?.sqft} Sq Ft
+                </div>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "1.8rem", color: "#3b82f6", marginBottom: "5px" }}>
+                  📍
+                </div>
+                <div style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+                  {properties.find(p => p.id === selectedProperty)?.location}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default PropertySelector;
