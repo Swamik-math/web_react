@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
@@ -8,11 +8,11 @@ import LoginPage from "./pages/LoginPage";
 import ImageGalleryTest from "./components/ImageGalleryTest";
 
 // Simple Job Detail Page
-const JobDetailPage = () => (
-  <div style={{ minHeight: "calc(100vh - 200px)", padding: "80px 20px" }}>
-    <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-      <h1 style={{ fontSize: "3rem", marginBottom: "30px" }}>Job Details</h1>
-      <p style={{ fontSize: "1.125rem", lineHeight: "1.6" }}>
+const JobDetailPage: React.FC = () => (
+  <div className="min-h-[calc(100vh-200px)] px-5 py-20">
+    <div className="max-w-3xl mx-auto">
+      <h1 className="text-5xl font-bold mb-8">Job Details</h1>
+      <p className="text-lg leading-relaxed text-gray-700">
         Detailed job description would appear here. This could include responsibilities,
         requirements, benefits, and application instructions.
       </p>
@@ -21,18 +21,18 @@ const JobDetailPage = () => (
 );
 
 // Join Page Component
-const JoinPage = () => (
-  <div style={{ minHeight: "calc(100vh - 200px)", padding: "80px 20px" }}>
-    <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-      <h1 style={{ fontSize: "3rem", marginBottom: "30px" }}>Join Our Community</h1>
-      <p style={{ fontSize: "1.125rem", lineHeight: "1.6" }}>
+const JoinPage: React.FC = () => (
+  <div className="min-h-[calc(100vh-200px)] px-5 py-20">
+    <div className="max-w-3xl mx-auto">
+      <h1 className="text-5xl font-bold mb-8">Join Our Community</h1>
+      <p className="text-lg leading-relaxed text-gray-700">
         Join our community to get updates on new properties, virtual tours, and real estate insights.
       </p>
     </div>
   </div>
 );
 
-function App() {
+function App(): React.ReactElement {
   return (
     <Router>
       <Layout>
